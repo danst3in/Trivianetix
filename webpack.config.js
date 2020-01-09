@@ -10,7 +10,7 @@ module.exports = {
     // contentBase: path.resolve(__dirname, 'build')
     publicPath: '/build/',
     proxy: {
-      '/': 'http://localhost:3000',
+      '/api': 'http://localhost:3000',
     },
   },
   mode: process.env.NODE_ENV,
@@ -33,3 +33,4 @@ module.exports = {
     ]
   }
 };
+
