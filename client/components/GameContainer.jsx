@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 class GameContainer extends Component {
   render() {
     let gameMode = this.props.gameMode;
+    let leadMode = this.props.leadMode;
     let startGame = this.props.startGame;
+    let leaderboardShow = this.props.leaderboardShow;
     let question = this.props.question;
     let correctAnswer;
     let incorrectAnswers;
@@ -27,8 +29,9 @@ class GameContainer extends Component {
         {!gameMode ?
           <React.Fragment>
             <button onClick={() => startGame()}>Play Game </button>
+            <button onClick={() => leaderboardShow()}>View Leaderboard </button>
           </React.Fragment>
-          :
+          : 
           //*================================================================= */}
           //* When User is logged in, and gameMode=true, render GameContainer */}
           //*================================================================= */}

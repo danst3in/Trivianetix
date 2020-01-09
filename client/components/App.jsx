@@ -11,6 +11,7 @@ class App extends Component {
     //ACTUAL DEFAULT
       username: document.cookie.slice(9),
       gameMode: false,
+      leadMode: false,
       results: [],
       stats: {gamesPlayed: 0, correctAnswers: 0},
       leaderboard: {},
@@ -51,6 +52,7 @@ class App extends Component {
     this.startGame = this.startGame.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.leaderboardFetch = this.leaderboardFetch.bind(this);
+    this.leaderboardShow = this.leaderboardShow.bind(this);
   }
 
 // Wait until server is working to test correct data
@@ -77,9 +79,11 @@ class App extends Component {
       .then(data => {
         const { results, gamesPlayed, correctAnswers} = data;
         const gameMode = true;
+        const leadMode = false;
         const question = results.pop();
         this.setState({
           gameMode,
+          leadMode,
           results,
           question,
           stats: { gamesPlayed, correctAnswers },
@@ -88,6 +92,7 @@ class App extends Component {
       .catch(err => { console.log(err); })
     } else {
       let gameMode = this.state.gameMode;
+      let leadMode = this.state.leadMode;
       let results = [...this.state.results];
       let question = this.state.question;
 
@@ -95,10 +100,12 @@ class App extends Component {
       if (results.length > 0) {
         question = results.pop();
         gameMode = true;
+        leadMode = false;
       }
       // Updating state
       this.setState({
         gameMode,
+        leadMode,
         results,
         question,
         choice: 'pending',
@@ -106,8 +113,51 @@ class App extends Component {
     }
   }
 
+  leaderboardShow() {
+    if (!this.state.leadMode){
+      fetch(`/trivia/${this.state.username}`) // ?????
+      .then(res => res.json())
+      .then(data => {
+        const { results, gamesPlayed, correctAnswers} = data;
+        const gameMode = false;
+        const leadMode = true;
+        // const question = results.pop();
+        this.setState({
+          gameMode,
+          leadMode,
+          // results,
+          // question,
+          // stats: { gamesPlayed, correctAnswers },
+        })
+      })
+      .catch(err => { console.log(err); })
+    }
+    // else {
+    //   let gameMode = this.state.gameMode;
+    //   let leadMode = this.state.leadMode;
+      // let results = [...this.state.results];
+      // let question = this.state.question;
+
+      // populate question
+      // if (results.length > 0) {
+      //   question = results.pop();
+      //   gameMode = true;
+      //   leadMode = false;
+      // }
+      // Updating state
+      // this.setState({
+      //   gameMode,
+      //   leadMode,
+      //   results,
+      //   question,
+      //   choice: 'pending',
+      // })
+    // }
+  }
+
   handleChange(e) {
     let gameMode = this.state.gameMode;
+    let leadMode = this.state.leadMode;
     const choice = e.target.value;
     const correct = this.state.question.correct_answer;
     const correctResponses = [...this.state.correctResponses];
@@ -277,30 +327,42 @@ class App extends Component {
     return (
       <div className="app">
         {/* ===================================================================================== */}
-        {/* When User is logged in, and gameMode=false, render UserInfo, Stats, and GameContainer */}
+        {/* When User is logged in, and gameMode=false, leadMode=false, render UserInfo, Stats, and GameContainer */}
         {/* ===================================================================================== */}
-        <div id="LeaderBar-chart">
-        <LeaderBar data={this.state.leaderboard} style={leaderStyle }/>
-        </div>
-        {!this.state.gameMode ?
+
+        {!this.state.gameMode && !this.state.leadMode ?
           <React.Fragment>
-            <UserInfo username={this.state.username} gameMode={this.state.gameMode} />
+            <UserInfo username={this.state.username} gameMode={this.state.gameMode}
+             leadMode={this.state.leadMode} />
             <Stats stats={this.state.stats} gameMode={this.state.gameMode} />
-            <GameContainer results={this.state.results} gameMode={this.state.gameMode} startGame={this.startGame} />
+            <GameContainer results={this.state.results} gameMode={this.state.gameMode}
+             startGame={this.startGame} leadMode={this.state.leadMode} leaderboardShow = {this.leaderboardShow} />
 
           </React.Fragment>
-          :
+          : this.state.gameMode && !this.state.leadMode ?
         //*================================================================= */}
-        //* When User is logged in, and gameMode=true, render GameContainer */}
+        //* When User is logged in, and gameMode=true, leadMode=false, render GameContainer */}
         //*================================================================= */}
           <React.Fragment>
             <GameContainer
               choice={this.state.choice}
               results={this.state.results}
               gameMode={this.state.gameMode}
+              leadMode={this.state.leadMode}
               question={this.state.question}
-              handleChange={this.handleChange}/>
-          </React.Fragment>}
+              handleChange={this.handleChange}
+              leaderboardShow = {this.leaderboardShow}/>
+          </React.Fragment>
+          :
+        //*================================================================= */}
+        //* When User is logged in, and leadMode=true, gameMode=false, render LeaderBar */}
+        //*================================================================= */}
+        <React.Fragment><div id="LeaderBar-chart">
+        <LeaderBar data={this.state.leaderboard} gameMode={this.state.gameMode}
+         leadMode={this.state.leadMode} leaderboard = {this.leaderboardShow} />
+        </div></React.Fragment>
+        }
+
         {/* ================================================================= */}
       </div>
     );

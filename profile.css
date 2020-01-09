@@ -1,8 +1,13 @@
+html {
+  height: 100%;
+}
 body {
-    background: url(https://www.faarmembers.com/wp-content/uploads/2019/01/trivia-background.jpg);
-    background-size:     auto;                      
+    /* background: url(https://www.faarmembers.com/wp-content/uploads/2019/01/trivia-background.jpg); */
+    background: radial-gradient(ellipse at center, rgba(242,246,248,1) 17%,rgba(181,198,208,1) 48%,rgba(181,198,208,1) 48%,rgba(224,239,249,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-size:     auto;
     background-repeat:   no-repeat;
-    background-position: top; 
+    background-position: top;
+    height: 100%;
   }
 
 p {
@@ -18,7 +23,7 @@ p {
         color: #4e3043;
         padding: 100px 50px;
         padding-bottom: 100px;
-        
+
     }
     .scoreboard {
         text-align: center;
@@ -27,21 +32,22 @@ p {
         /* -webkit-background-clip: text */
         /* -webkit-text-fill-color: transparent; */
     }
-    
+
     .app{
         text-align: center;
+        height: 100%;
     }
 
     .app button {
         width: 30%;
         padding: 8px 5px;
-    
+
     /* Styles */
-    background: linear-gradient(rgba(51, 235, 14, 0.705), rgba(76,49,65,0.7));    
+    background: linear-gradient(rgba(51, 235, 14, 0.705), rgba(76,49,65,0.7));
     border-radius: 5px;
     border: 1px solid #4e3043;
-    box-shadow: 
-    	inset 0 1px rgba(255,255,255,0.4), 
+    box-shadow:
+    	inset 0 1px rgba(255,255,255,0.4),
     	0 2px 1px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: all 0.3s ease-out;
@@ -54,8 +60,8 @@ p {
     font-family: 'Luckiest Guy', cursive;
     }
     .app button:hover {
-        box-shadow: 
-            inset 0 1px rgba(255,255,255,0.2), 
+        box-shadow:
+            inset 0 1px rgba(255,255,255,0.2),
             inset 0 20px 30px rgba(99,64,86,0.5);
         font-weight: bolder;
         font-size: 23px;
@@ -79,7 +85,7 @@ p {
         font-size: 25px;
 
     }
-   
+
     #buttonb:hover {
         font-size: 25px;
 
@@ -93,11 +99,8 @@ p {
     #buttond:hover {
         font-size: 25px;
     }
- 
- 
- 
- 
- 
- 
 
 
+    #LeaderBar-chart {
+      height: 475px ;
+    }
