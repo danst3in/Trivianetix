@@ -1,7 +1,4 @@
-import React, { Component } from "react";
-import UserInfo from "./UserInfo.jsx";
-import Stats from "./Stats.jsx";
-import GameContainer from "./GameContainer.jsx";
+import React, { Component } from 'react';
 
 class App extends Component {
   constructor(props) {
@@ -165,6 +162,7 @@ class App extends Component {
 
   render() {
     return (
+
       <div className="app">
         {/* ===================================================================================== */}
         {/* When User is logged in, and gameMode=false, render UserInfo, Stats, and GameContainer */}
@@ -188,8 +186,9 @@ class App extends Component {
               handleChange={this.handleChange} />
           </React.Fragment>}
         {/* ================================================================= */}
+
       </div>
-    );
+    )
   }
 }
 
