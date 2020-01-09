@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class App extends Component {
-<<<<<<< HEAD
-  render () {
-=======
   constructor(props) {
     super(props);
     this.state = {
@@ -153,7 +150,6 @@ class App extends Component {
   }
 
   render() {
->>>>>>> d9c664d4667635ff19690d7cf0906416772dc362
     return (
       <div>
         <p>LOREM IPSUM REACTO, DID THIS SHOW?</p>
