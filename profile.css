@@ -1,10 +1,16 @@
+
 /* body {
   background: url(https://www.faarmembers.com/wp-content/uploads/2019/01/trivia-background.jpg);
   background-size: auto;
   background-repeat: no-repeat;
   background-position: top;
 } */
-
+html {
+  height: 100%;
+}
+body {
+    height: 100%;
+  }
 * {
   box-sizing: border-box;
 }
@@ -99,7 +105,6 @@
     width: 100%;
     display: block;
     margin-bottom: 20px;
-  }
 }
 
 /* Style the counter cards */
@@ -110,10 +115,7 @@
   text-align: center;
   border-radius: 10px;
 }
-
-p {
-
-}
+  
 .header-tag {
   text-align: center;
   font-size: 72px;
@@ -188,6 +190,11 @@ p {
   font-size: 25px;
 }
 
+
 #buttond:hover {
   font-size: 25px;
 } */
+  
+    #LeaderBar-chart {
+      height: 475px ;
+    }
