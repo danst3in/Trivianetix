@@ -7,10 +7,9 @@ const pool = new Pool({
 });
 
 
-module.exports = { 
+module.exports = {
     query: (text, params, callback) => {
         console.log('exeuted query', text);
         return pool.query(text, params, callback);
     }
 };
-
