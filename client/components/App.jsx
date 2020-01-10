@@ -62,7 +62,8 @@ class App extends Component {
   // Wait until server is working to test correct data
   componentDidMount() {
     console.log('MOUNTED');
-    this.leaderboardFetch();
+    // this.leaderboardFetch();
+    this.getLeadersByDifficulty();
     fetch(`/trivia/${this.state.username}`)
       .then(res => res.json())
       .then(data => {
@@ -227,109 +228,109 @@ class App extends Component {
     // GOT /response/leaderboard for fetch
     const data = [
       {
-        country: 'AD',
-        'hot dog': 98,
-        'hot dogColor': 'hsl(80, 70%, 50%)',
-        burger: 146,
-        burgerColor: 'hsl(298, 70%, 50%)',
-        sandwich: 78,
-        sandwichColor: 'hsl(135, 70%, 50%)',
-        kebab: 180,
-        kebabColor: 'hsl(84, 70%, 50%)',
-        fries: 81,
-        friesColor: 'hsl(342, 70%, 50%)',
-        donut: 125,
-        donutColor: 'hsl(60, 70%, 50%)'
+        "country": "AD",
+        "hot dog": 98,
+        "hot dogColor": "hsl(80, 70%, 50%)",
+        "burger": 146,
+        "burgerColor": "hsl(298, 70%, 50%)",
+        "sandwich": 78,
+        "sandwichColor": "hsl(135, 70%, 50%)",
+        "kebab": 180,
+        "kebabColor": "hsl(84, 70%, 50%)",
+        "fries": 81,
+        "friesColor": "hsl(342, 70%, 50%)",
+        "donut": 125,
+        "donutColor": "hsl(60, 70%, 50%)"
       },
       {
-        country: 'AE',
-        'hot dog': 28,
-        'hot dogColor': 'hsl(234, 70%, 50%)',
-        burger: 38,
-        burgerColor: 'hsl(325, 70%, 50%)',
-        sandwich: 98,
-        sandwichColor: 'hsl(15, 70%, 50%)',
-        kebab: 148,
-        kebabColor: 'hsl(80, 70%, 50%)',
-        fries: 49,
-        friesColor: 'hsl(197, 70%, 50%)',
-        donut: 118,
-        donutColor: 'hsl(344, 70%, 50%)'
+        "country": "AE",
+        "hot dog": 28,
+        "hot dogColor": "hsl(234, 70%, 50%)",
+        "burger": 38,
+        "burgerColor": "hsl(325, 70%, 50%)",
+        "sandwich": 98,
+        "sandwichColor": "hsl(15, 70%, 50%)",
+        "kebab": 148,
+        "kebabColor": "hsl(80, 70%, 50%)",
+        "fries": 49,
+        "friesColor": "hsl(197, 70%, 50%)",
+        "donut": 118,
+        "donutColor": "hsl(344, 70%, 50%)"
       },
       {
-        country: 'AF',
-        'hot dog': 146,
-        'hot dogColor': 'hsl(185, 70%, 50%)',
-        burger: 75,
-        burgerColor: 'hsl(169, 70%, 50%)',
-        sandwich: 132,
-        sandwichColor: 'hsl(325, 70%, 50%)',
-        kebab: 74,
-        kebabColor: 'hsl(191, 70%, 50%)',
-        fries: 66,
-        friesColor: 'hsl(152, 70%, 50%)',
-        donut: 86,
-        donutColor: 'hsl(197, 70%, 50%)'
+        "country": "AF",
+        "hot dog": 146,
+        "hot dogColor": "hsl(185, 70%, 50%)",
+        "burger": 75,
+        "burgerColor": "hsl(169, 70%, 50%)",
+        "sandwich": 132,
+        "sandwichColor": "hsl(325, 70%, 50%)",
+        "kebab": 74,
+        "kebabColor": "hsl(191, 70%, 50%)",
+        "fries": 66,
+        "friesColor": "hsl(152, 70%, 50%)",
+        "donut": 86,
+        "donutColor": "hsl(197, 70%, 50%)"
       },
       {
-        country: 'AG',
-        'hot dog': 37,
-        'hot dogColor': 'hsl(88, 70%, 50%)',
-        burger: 163,
-        burgerColor: 'hsl(322, 70%, 50%)',
-        sandwich: 167,
-        sandwichColor: 'hsl(181, 70%, 50%)',
-        kebab: 94,
-        kebabColor: 'hsl(297, 70%, 50%)',
-        fries: 68,
-        friesColor: 'hsl(85, 70%, 50%)',
-        donut: 126,
-        donutColor: 'hsl(294, 70%, 50%)'
+        "country": "AG",
+        "hot dog": 37,
+        "hot dogColor": "hsl(88, 70%, 50%)",
+        "burger": 163,
+        "burgerColor": "hsl(322, 70%, 50%)",
+        "sandwich": 167,
+        "sandwichColor": "hsl(181, 70%, 50%)",
+        "kebab": 94,
+        "kebabColor": "hsl(297, 70%, 50%)",
+        "fries": 68,
+        "friesColor": "hsl(85, 70%, 50%)",
+        "donut": 126,
+        "donutColor": "hsl(294, 70%, 50%)"
       },
       {
-        country: 'AI',
-        'hot dog': 156,
-        'hot dogColor': 'hsl(9, 70%, 50%)',
-        burger: 200,
-        burgerColor: 'hsl(152, 70%, 50%)',
-        sandwich: 156,
-        sandwichColor: 'hsl(147, 70%, 50%)',
-        kebab: 33,
-        kebabColor: 'hsl(303, 70%, 50%)',
-        fries: 66,
-        friesColor: 'hsl(299, 70%, 50%)',
-        donut: 95,
-        donutColor: 'hsl(225, 70%, 50%)'
+        "country": "AI",
+        "hot dog": 156,
+        "hot dogColor": "hsl(9, 70%, 50%)",
+        "burger": 200,
+        "burgerColor": "hsl(152, 70%, 50%)",
+        "sandwich": 156,
+        "sandwichColor": "hsl(147, 70%, 50%)",
+        "kebab": 33,
+        "kebabColor": "hsl(303, 70%, 50%)",
+        "fries": 66,
+        "friesColor": "hsl(299, 70%, 50%)",
+        "donut": 95,
+        "donutColor": "hsl(225, 70%, 50%)"
       },
       {
-        country: 'AL',
-        'hot dog': 86,
-        'hot dogColor': 'hsl(107, 70%, 50%)',
-        burger: 189,
-        burgerColor: 'hsl(172, 70%, 50%)',
-        sandwich: 25,
-        sandwichColor: 'hsl(239, 70%, 50%)',
-        kebab: 156,
-        kebabColor: 'hsl(342, 70%, 50%)',
-        fries: 54,
-        friesColor: 'hsl(103, 70%, 50%)',
-        donut: 102,
-        donutColor: 'hsl(99, 70%, 50%)'
+        "country": "AL",
+        "hot dog": 86,
+        "hot dogColor": "hsl(107, 70%, 50%)",
+        "burger": 189,
+        "burgerColor": "hsl(172, 70%, 50%)",
+        "sandwich": 25,
+        "sandwichColor": "hsl(239, 70%, 50%)",
+        "kebab": 156,
+        "kebabColor": "hsl(342, 70%, 50%)",
+        "fries": 54,
+        "friesColor": "hsl(103, 70%, 50%)",
+        "donut": 102,
+        "donutColor": "hsl(99, 70%, 50%)"
       },
       {
-        country: 'AM',
-        'hot dog': 101,
-        'hot dogColor': 'hsl(211, 70%, 50%)',
-        burger: 48,
-        burgerColor: 'hsl(149, 70%, 50%)',
-        sandwich: 138,
-        sandwichColor: 'hsl(236, 70%, 50%)',
-        kebab: 42,
-        kebabColor: 'hsl(218, 70%, 50%)',
-        fries: 110,
-        friesColor: 'hsl(27, 70%, 50%)',
-        donut: 103,
-        donutColor: 'hsl(82, 70%, 50%)'
+        "country": "AM",
+        "hot dog": 101,
+        "hot dogColor": "hsl(211, 70%, 50%)",
+        "burger": 48,
+        "burgerColor": "hsl(149, 70%, 50%)",
+        "sandwich": 138,
+        "sandwichColor": "hsl(236, 70%, 50%)",
+        "kebab": 42,
+        "kebabColor": "hsl(218, 70%, 50%)",
+        "fries": 110,
+        "friesColor": "hsl(27, 70%, 50%)",
+        "donut": 103,
+        "donutColor": "hsl(82, 70%, 50%)"
       }
     ];
     this.setState({
@@ -337,6 +338,7 @@ class App extends Component {
       leaderboard: data
     });
   }
+
 
   //new from backend group
   sendStats() {
@@ -370,36 +372,66 @@ class App extends Component {
       }
     })
       .then(res => res.json())
-      .then(data => {
-        data.forEach(el => {
-          const easy = {};
-          const medium = {};
-          const hard = {};
+      .then(fetchData => {
+        // const parsedData = JSON.parse(fetchData)
+        // Dan's addition
+        // const exportdata = []
+        console.log('fetchData: ', fetchData);
+        const dataConverter = (fetchedObjArr) => {
+          let result = {};
+          fetchedObjArr.forEach(fetchedObj => {
+            // console.log('fetchedObj.username: ', fetchedObj.username);
+            // console.log('fetchedObj: ', fetchedObj);
+            if (!result[fetchedObj.username]){
+              let tempObj = {}
+               // tempObj[fetchedObj.username]= {};
+               result[fetchedObj.username] = tempObj;
+            }
+              // console.log('result[fetchedObj][username] ', result[fetchedObj.username]);
+              // console.log('[fetchedObj.category] , result[fetchedObj.username][fetchedObj.category] before recalc ', [fetchedObj.category], result[fetchedObj.username][fetchedObj.category] );
+              // console.log(result[fetchedObj.username]);
+              result[fetchedObj.username][fetchedObj.category] = (result[fetchedObj.username][fetchedObj.category] || 0) + 1;
+              // console.log('result[fetchedObj.username][fetchedObj.category] after recalc ', result[fetchedObj.username][fetchedObj.category] );
 
-          if (el.difficulty === 'easy') {
-            easy[el.username] = (easy[el.username] || 0) + 1;
+          })
+          // console.log('made first set of objects');
+          // console.log('result obj ', result);
+          const resultArr = []
+          for (let key in result) {
+            let newObj = {}
+            // console.log('result in for in ', result);
+            // console.log('key ', key);
+              newObj.username = key;
+              // console.log('result[key] ', result[key]);
+              // console.log('newObj[username]', newObj.username);
+              for (let twoKey in result[key]) {
+                if (twoKey !== '0') {
+                // console.log('twoKey ', twoKey, typeof twoKey);
+                // console.log('[key] ', key);
+                // console.log('result[key] ', result[key]);
+                let colorString = `${twoKey}Color`;
+                newObj[twoKey] = result[key][twoKey];
+                newObj[colorString] = "hsl(80, 70%, 50%)";
+                }
+              }
+              // resultArr.push(JSON.stringify(newObj));
+              resultArr.push(newObj);
           }
-          if (el.difficulty === 'medium') {
-            medium[el.username] = (medium[el.username] || 0) + 1;
-          }
-          if (el.difficulty === 'hard') {
-            hard[el.username] = (hard[el.username] || 0) + 1;
-          }
-          return easy, medium, hard;
-        });
-        const easyLeader = Object.keys(easy).reduce((a, b) =>
-          easy[a] > easy[b] ? a : b
-        );
-        const mediumLeader = Object.keys(easy).reduce((a, b) =>
-          medium[a] > medium[b] ? a : b
-        );
-        const hardLeader = Object.keys(easy).reduce((a, b) =>
-          hard[a] > hard[b] ? a : b
-        );
-        return easyLeader, mediumLeader, hardLeader;
-      })
+          console.log('made second set of objects');
+          console.log(resultArr);
+          return resultArr;
+        }
+        const data = dataConverter(fetchData);
+      this.setState({
+        ...this.state,
+        leaderboard: data
+      });
+    })
       .catch(err => console.log('error in getLeadersByDifficulty', err));
   }
+
+
+
 
   getLeadersByCategory() {
     fetch('/response/leaderboard', {
