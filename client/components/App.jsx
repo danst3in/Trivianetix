@@ -8,17 +8,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    //ACTUAL DEFAULT
+      //ACTUAL DEFAULT
       username: document.cookie.slice(9),
       gameMode: false,
       leadMode: false,
       results: [],
-      stats: {gamesPlayed: 0, correctAnswers: 0},
+      stats: { gamesPlayed: 0, correctAnswers: 0 },
       leaderboard: {},
       correctResponses: [],
       incorrectResponses: [],
-      question:{},
-      choice:'none'
+      question: {},
+      choice: 'none'
 
       //MOCK DATA
       // username: document.cookie.slice(9),
@@ -55,41 +55,41 @@ class App extends Component {
     this.leaderboardShow = this.leaderboardShow.bind(this);
   }
 
-// Wait until server is working to test correct data
+  // Wait until server is working to test correct data
   componentDidMount() {
     console.log('MOUNTED');
     this.leaderboardFetch();
     fetch(`/trivia/${this.state.username}`)
-    .then(res => res.json())
-    .then(data => {
-      const { username, results, gamesPlayed, correctAnswers} = data;
-      this.setState({
-        username,
-        results,
-        stats: { gamesPlayed, correctAnswers },
-      })
-    })
-    .catch((err) => { console.log(err); })
-  }
-
-  startGame() {
-    if (!this.state.gameMode){
-      fetch(`/trivia/${this.state.username}`)
       .then(res => res.json())
       .then(data => {
-        const { results, gamesPlayed, correctAnswers} = data;
-        const gameMode = true;
-        const leadMode = false;
-        const question = results.pop();
+        const { username, results, gamesPlayed, correctAnswers } = data;
         this.setState({
-          gameMode,
-          leadMode,
+          username,
           results,
-          question,
           stats: { gamesPlayed, correctAnswers },
         })
       })
-      .catch(err => { console.log(err); })
+      .catch((err) => { console.log(err); })
+  }
+
+  startGame() {
+    if (!this.state.gameMode) {
+      fetch(`/trivia/${this.state.username}`)
+        .then(res => res.json())
+        .then(data => {
+          const { results, gamesPlayed, correctAnswers } = data;
+          const gameMode = true;
+          const leadMode = false;
+          const question = results.pop();
+          this.setState({
+            gameMode,
+            leadMode,
+            results,
+            question,
+            stats: { gamesPlayed, correctAnswers },
+          })
+        })
+        .catch(err => { console.log(err); })
     } else {
       let gameMode = this.state.gameMode;
       let leadMode = this.state.leadMode;
@@ -114,50 +114,55 @@ class App extends Component {
   }
 
   leaderboardShow() {
-    if (!this.state.leadMode){
+    if (!this.state.leadMode) {
       fetch(`/trivia/${this.state.username}`) // ?????
-      .then(res => res.json())
-      .then(data => {
-        const { results, gamesPlayed, correctAnswers} = data;
-        const gameMode = false;
-        const leadMode = true;
-        // const question = results.pop();
-        this.setState({
-          gameMode,
-          leadMode,
-          // results,
-          // question,
-          // stats: { gamesPlayed, correctAnswers },
+        .then(res => res.json())
+        .then(data => {
+          const { results, gamesPlayed, correctAnswers } = data;
+          const gameMode = false;
+          const leadMode = true;
+          // const question = results.pop();
+          this.setState({
+            gameMode,
+            leadMode,
+            // results,
+            // question,
+            // stats: { gamesPlayed, correctAnswers },
+          })
         })
-      })
-      .catch(err => { console.log(err); })
+        .catch(err => { console.log(err); })
     }
     // else {
     //   let gameMode = this.state.gameMode;
     //   let leadMode = this.state.leadMode;
-      // let results = [...this.state.results];
-      // let question = this.state.question;
+    // let results = [...this.state.results];
+    // let question = this.state.question;
 
-      // populate question
-      // if (results.length > 0) {
-      //   question = results.pop();
-      //   gameMode = true;
-      //   leadMode = false;
-      // }
-      // Updating state
-      // this.setState({
-      //   gameMode,
-      //   leadMode,
-      //   results,
-      //   question,
-      //   choice: 'pending',
-      // })
+    // populate question
+    // if (results.length > 0) {
+    //   question = results.pop();
+    //   gameMode = true;
+    //   leadMode = false;
+    // }
+    // Updating state
+    // this.setState({
+    //   gameMode,
+    //   leadMode,
+    //   results,
+    //   question,
+    //   choice: 'pending',
+    // })
     // }
   }
 
   handleChange(e) {
+    console.log('e.target ', e.target)
+    console.log('query selector ', document.querySelector("#buttonc"))
+    console.log('a value?????', document.querySelector("#buttona").firstChild.defaultValue)
+    console.log('b value?????', document.querySelector("#buttonb").firstChild.defaultValue)
+    console.log('c value?????', document.querySelector("#buttonc").firstChild.defaultValue)
+    console.log('d value?????', document.querySelector("#buttond").firstChild.defaultValue)
     let gameMode = this.state.gameMode;
-    let leadMode = this.state.leadMode;
     const choice = e.target.value;
     const correct = this.state.question.correct_answer;
     const correctResponses = [...this.state.correctResponses];
@@ -165,22 +170,48 @@ class App extends Component {
     console.log('button value', e.target.value);
     console.log('correct', correct);
     if (choice === correct) {
+      document.getElementById(e.target.labels[0].id).style.backgroundColor = 'green';
       correctResponses.push(this.state.question)
     } else {
       incorrectResponses.push(this.state.question);
+      document.getElementById(e.target.labels[0].id).style.backgroundColor = 'red';
+
+      if (document.querySelector("#buttona").firstChild.defaultValue === correct) {
+        document.getElementById('buttona').style.backgroundColor = 'green';
+      }
+      if (document.querySelector("#buttonb").firstChild.defaultValue === correct) {
+        document.getElementById('buttonb').style.backgroundColor = 'green';
+      }
+      if (document.querySelector("#buttonc").firstChild.defaultValue === correct) {
+        document.getElementById('buttonc').style.backgroundColor = 'green';
+      }
+      if (document.querySelector("#buttond").firstChild.defaultValue === correct) {
+        document.getElementById('buttond').style.backgroundColor = 'green';
+      }
     }
-    if (this.state.results.length > 0) {
-      this.startGame();
-    } else {
-      this.sendResponse();
-      gameMode = false;
-    }
+
     e.target.checked = false;
-    this.setState({
-      gameMode,
-      correctResponses,
-      incorrectResponses,
-    })
+    setTimeout((e) => {
+      document.getElementById('buttona').style.backgroundColor = '';
+      document.getElementById('buttonb').style.backgroundColor = '';
+      document.getElementById('buttonc').style.backgroundColor = '';
+      document.getElementById('buttond').style.backgroundColor = '';
+
+      if (this.state.results.length > 0) {
+        this.startGame();
+      }
+      else {
+        this.sendResponse();
+        gameMode = false;
+      }
+      e.target.checked = false;
+      this.setState({
+        gameMode,
+        correctResponses,
+        incorrectResponses,
+      })
+    }
+      , 2000)
   }
 
   sendResponse() {
@@ -195,15 +226,15 @@ class App extends Component {
         correctAnswers: this.state.correctResponses.length,
       }),
     }).then(res => res.json())
-    .then(data => {
-      const { gamesPlayed, correctAnswers } = data;
-      this.setState({
-        stats: {gamesPlayed, correctAnswers},
+      .then(data => {
+        const { gamesPlayed, correctAnswers } = data;
+        this.setState({
+          stats: { gamesPlayed, correctAnswers },
+        })
       })
-    })
-    .catch(err => {
-      console.log(err);
-    })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   leaderboardFetch() { // GOT /response/leaderboard for fetch
@@ -333,34 +364,34 @@ class App extends Component {
         {!this.state.gameMode && !this.state.leadMode ?
           <React.Fragment>
             <UserInfo username={this.state.username} gameMode={this.state.gameMode}
-             leadMode={this.state.leadMode} />
+              leadMode={this.state.leadMode} />
             <Stats stats={this.state.stats} gameMode={this.state.gameMode} />
             <GameContainer results={this.state.results} gameMode={this.state.gameMode}
-             startGame={this.startGame} leadMode={this.state.leadMode} leaderboardShow = {this.leaderboardShow} />
+              startGame={this.startGame} leadMode={this.state.leadMode} leaderboardShow={this.leaderboardShow} />
 
           </React.Fragment>
           : this.state.gameMode && !this.state.leadMode ?
-        //*================================================================= */}
-        //* When User is logged in, and gameMode=true, leadMode=false, render GameContainer */}
-        //*================================================================= */}
-          <React.Fragment>
-            <GameContainer
-              choice={this.state.choice}
-              results={this.state.results}
-              gameMode={this.state.gameMode}
-              leadMode={this.state.leadMode}
-              question={this.state.question}
-              handleChange={this.handleChange}
-              leaderboardShow = {this.leaderboardShow}/>
-          </React.Fragment>
-          :
-        //*================================================================= */}
-        //* When User is logged in, and leadMode=true, gameMode=false, render LeaderBar */}
-        //*================================================================= */}
-        <React.Fragment><div id="LeaderBar-chart">
-        <LeaderBar data={this.state.leaderboard} gameMode={this.state.gameMode}
-         leadMode={this.state.leadMode} leaderboard = {this.leaderboardShow} />
-        </div></React.Fragment>
+            //*================================================================= */}
+            //* When User is logged in, and gameMode=true, leadMode=false, render GameContainer */}
+            //*================================================================= */}
+            <React.Fragment>
+              <GameContainer
+                choice={this.state.choice}
+                results={this.state.results}
+                gameMode={this.state.gameMode}
+                leadMode={this.state.leadMode}
+                question={this.state.question}
+                handleChange={this.handleChange}
+                leaderboardShow={this.leaderboardShow} />
+            </React.Fragment>
+            :
+            //*================================================================= */}
+            //* When User is logged in, and leadMode=true, gameMode=false, render LeaderBar */}
+            //*================================================================= */}
+            <React.Fragment><div id="LeaderBar-chart">
+              <LeaderBar data={this.state.leaderboard} gameMode={this.state.gameMode}
+                leadMode={this.state.leadMode} leaderboard={this.leaderboardShow} />
+            </div></React.Fragment>
         }
 
         {/* ================================================================= */}
