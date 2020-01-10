@@ -166,8 +166,13 @@ class App extends Component {
   }
 
   handleChange(e) {
+    console.log('e.target ', e.target)
+    console.log('query selector ', document.querySelector("#buttonc"))
+    console.log('a value?????', document.querySelector("#buttona").firstChild.defaultValue)
+    console.log('b value?????', document.querySelector("#buttonb").firstChild.defaultValue)
+    console.log('c value?????', document.querySelector("#buttonc").firstChild.defaultValue)
+    console.log('d value?????', document.querySelector("#buttond").firstChild.defaultValue)
     let gameMode = this.state.gameMode;
-    let leadMode = this.state.leadMode;
     const choice = e.target.value;
     const correct = this.state.question.correct_answer;
     const correctResponses = [...this.state.correctResponses];
@@ -175,28 +180,56 @@ class App extends Component {
     console.log('button value', e.target.value);
     console.log('correct', correct);
     if (choice === correct) {
-      correctResponses.push(this.state.question);
+
+      document.getElementById(e.target.labels[0].id).style.backgroundColor = 'green';
+      correctResponses.push(this.state.question)
       this.setState({ is_correct: 'true' });
     } else {
       incorrectResponses.push(this.state.question);
-      this.setState({ is_correct: 'false' });
+            this.setState({ is_correct: 'false' });
+      document.getElementById(e.target.labels[0].id).style.backgroundColor = 'red';
+
+      if (document.querySelector("#buttona").firstChild.defaultValue === correct) {
+        document.getElementById('buttona').style.backgroundColor = 'green';
+      }
+      if (document.querySelector("#buttonb").firstChild.defaultValue === correct) {
+        document.getElementById('buttonb').style.backgroundColor = 'green';
+      }
+      if (document.querySelector("#buttonc").firstChild.defaultValue === correct) {
+        document.getElementById('buttonc').style.backgroundColor = 'green';
+      }
+      if (document.querySelector("#buttond").firstChild.defaultValue === correct) {
+        document.getElementById('buttond').style.backgroundColor = 'green';
+      }
+
+ 
     }
-    if (this.state.results.length > 0) {
-      this.startGame();
-    } else {
-      this.sendResponse();
-      gameMode = false;
-    }
+
     e.target.checked = false;
-    this.setState(
-      {
+
+    setTimeout((e) => {
+      document.getElementById('buttona').style.backgroundColor = '';
+      document.getElementById('buttonb').style.backgroundColor = '';
+      document.getElementById('buttonc').style.backgroundColor = '';
+      document.getElementById('buttond').style.backgroundColor = '';
+
+      if (this.state.results.length > 0) {
+        this.startGame();
+      }
+      else {
+        this.sendResponse();
+        gameMode = false;
+      }
+      e.target.checked = false;
+      this.setState({
         gameMode,
         correctResponses,
         incorrectResponses,
         choice
       },
-      () => this.sendStats()
-    );
+      () => this.sendStats())
+    }
+      , 2000)
   }
 
   sendResponse() {
@@ -687,50 +720,40 @@ class App extends Component {
 
         {!this.state.gameMode && !this.state.leadMode ? (
           <React.Fragment>
-            <UserInfo
-              username={this.state.username}
-              gameMode={this.state.gameMode}
-              leadMode={this.state.leadMode}
-            />
+
+            <UserInfo username={this.state.username} gameMode={this.state.gameMode}
+              leadMode={this.state.leadMode} />
             <Stats stats={this.state.stats} gameMode={this.state.gameMode} />
-            <GameContainer
-              results={this.state.results}
-              gameMode={this.state.gameMode}
-              startGame={this.startGame}
-              leadMode={this.state.leadMode}
-              leaderboardShow={this.leaderboardShow}
-            />
+            <GameContainer results={this.state.results} gameMode={this.state.gameMode}
+              startGame={this.startGame} leadMode={this.state.leadMode} leaderboardShow={this.leaderboardShow} />
+
           </React.Fragment>
-        ) : this.state.gameMode && !this.state.leadMode ? (
-          //*================================================================= */}
-          //* When User is logged in, and gameMode=true, leadMode=false, render GameContainer */}
-          //*================================================================= */}
-          <React.Fragment>
-            <GameContainer
-              choice={this.state.choice}
-              results={this.state.results}
-              gameMode={this.state.gameMode}
-              leadMode={this.state.leadMode}
-              question={this.state.question}
-              handleChange={this.handleChange}
-              leaderboardShow={this.leaderboardShow}
-            />
-          </React.Fragment>
-        ) : (
-          //*================================================================= */}
-          //* When User is logged in, and leadMode=true, gameMode=false, render LeaderBar */}
-          //*================================================================= */}
-          <React.Fragment>
-            <div id="LeaderBar-chart">
-              <LeaderBar
-                data={this.state.leaderboard}
+          : this.state.gameMode && !this.state.leadMode ?
+            //*================================================================= */}
+            //* When User is logged in, and gameMode=true, leadMode=false, render GameContainer */}
+            //*================================================================= */}
+            <React.Fragment>
+                <iframe src="http://localhost:3001"></iframe>
+
+              <GameContainer
+                choice={this.state.choice}
+                results={this.state.results}
                 gameMode={this.state.gameMode}
                 leadMode={this.state.leadMode}
-                leaderboard={this.leaderboardShow}
-              />
-            </div>
-          </React.Fragment>
-        )}
+                question={this.state.question}
+                handleChange={this.handleChange}
+                leaderboardShow={this.leaderboardShow} />
+            </React.Fragment>
+            :
+            //*================================================================= */}
+            //* When User is logged in, and leadMode=true, gameMode=false, render LeaderBar */}
+            //*================================================================= */}
+            <React.Fragment><div id="LeaderBar-chart">
+              <LeaderBar data={this.state.leaderboard} gameMode={this.state.gameMode}
+                leadMode={this.state.leadMode} leaderboard={this.leaderboardShow} />
+            </div></React.Fragment>
+        }
+          
 
         {/* ================================================================= */}
       </div>
