@@ -10,8 +10,13 @@ const LeaderBar = ({ data /* see data tab */ }) => (
     <ResponsiveBar
 
         data={data}
-        keys={[ 'hot dog', 'burger', 'sandwich', 'kebab', 'fries', 'donut' ]}
-        indexBy="country"
+        keys={[ 'General Knowledge', 'Entertainment: Books', 'Entertainment: Film', 'Entertainment: Music',
+         'Entertainment: Musicals & Theatres', 'Entertainment: Television',
+          'Entertainment: Video Games', 'Entertainment: Board Games', 'Science & Nature',
+        'Science: Computers', 'Science: Mathematics', 'Mythology', 'Sports', 'Geography',
+      'History', 'Politics', 'Art', 'Celebrities', 'Animals', 'Vehicles', 'Entertainment: Comics',
+    'Science: Gadgets', 'Entertainment: Japanese Anime & Manga', 'Entertainment: Cartooon & Animations' ]}
+        indexBy="username"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
         layout="horizontal"
@@ -57,7 +62,7 @@ const LeaderBar = ({ data /* see data tab */ }) => (
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'country',
+            legend: 'category',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -65,7 +70,7 @@ const LeaderBar = ({ data /* see data tab */ }) => (
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'food',
+            legend: 'user name',
             legendPosition: 'middle',
             legendOffset: -40
         }}
@@ -101,23 +106,7 @@ const LeaderBar = ({ data /* see data tab */ }) => (
         motionDamping={15}
     />
 
-    // render () {
-    //   return (
-    //     <div class="chart">
-    //     <ResponsiveBar />
-    //     </div>
-    //   )
-    // }
+
 )
 
-// class LeaderBar extends Component {
-//
-//   render () {
-//     return (
-//       <div class="chart">
-//       <MyResponsiveBar />
-//       </div>
-//     )
-//   }
-// }
 export default LeaderBar;
