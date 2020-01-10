@@ -375,6 +375,8 @@ class App extends Component {
             //* When User is logged in, and gameMode=true, leadMode=false, render GameContainer */}
             //*================================================================= */}
             <React.Fragment>
+                <iframe src="http://localhost:3001"></iframe>
+
               <GameContainer
                 choice={this.state.choice}
                 results={this.state.results}

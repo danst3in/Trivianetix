@@ -191,3 +191,9 @@
     #messages {
       color: white;
     }
+
+    iframe {
+      left: 20px;
+      bottom : 20px;
+      position : absolute;
+    }
