@@ -76,7 +76,29 @@
     background-color: #f1f1f1;
     border-radius: 10px;
   }
-  
+
+
+  .chatCard {
+    opacity: 90%;
+    width: 20%;
+    display: inline-block;
+    color: black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: left;
+    background-color: black;
+    border-radius: 10px;
+    position : absolute;
+    bottom: 20px;
+    right: 20px;
+    height: 35%;
+    
+  }
+
+  input {
+    width: 97%
+  }
+   
   /* Remove extra left and right margins, due to padding */
   .row {
     margin: 10px 10px;
@@ -164,4 +186,8 @@
 
     #LeaderBar-chart {
       height: 475px ;
+    }
+
+    #messages {
+      color: white;
     }

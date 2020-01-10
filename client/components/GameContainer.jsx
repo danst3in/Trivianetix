@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 
 class GameContainer extends Component {
+
+
   render() {
     let gameMode = this.props.gameMode;
     let leadMode = this.props.leadMode;
@@ -20,6 +22,9 @@ class GameContainer extends Component {
         [answers[i], answers[random]] = [answers[random], answers[i]]
       })
     }
+
+
+   
 
 
     return (
@@ -47,6 +52,21 @@ class GameContainer extends Component {
                 <a href="/leaderboard">Leaderboard</a>
               </div>
             </div>
+
+            <Draggable >
+              <div className="chatCard"> 
+              <h2>CHAT BOX</h2>  
+                <br/>
+                <p id='messages' align='left'>User 1: hi </p>
+                <p id='messages'>User 2: whaddup </p>
+                <p id='messages'>User 1: I'm going to beat you 😃 </p>
+                <p id='messages'>User 2: whatever! </p>
+
+                <input placeholder='Submit'></input>
+                {/* <button className='card' >Submit</button> */}
+              </div>
+            </Draggable>
+            
             <div className='question-app'>
               <Draggable><div className='question-tag' dangerouslySetInnerHTML={{ __html: question.question }}></div></Draggable>
 
@@ -102,3 +122,6 @@ class GameContainer extends Component {
 }
 
 export default GameContainer;
+
+
+//document.getElementById('messages')
